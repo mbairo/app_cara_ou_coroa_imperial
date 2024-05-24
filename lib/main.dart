@@ -1,3 +1,4 @@
+import 'package:cara_ou_coroa_imperial/DomPedro2.dart';
 import 'package:cara_ou_coroa_imperial/TelaPrinciapal.dart';
 import 'package:flutter/material.dart';
 
