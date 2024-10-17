@@ -18,27 +18,28 @@ class _JogoState extends State<Jogo> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-
     super.initState();
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
     _animation = Tween(begin: 0.0, end: 2 * pi).animate(_controller);
-    
+
     // Finaliza a animação do loading
-        _controller.addStatusListener((status) {
+    _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         setState(() {
           _loading = false;
         });
       }
     });
-    
   }
 
   void _functionJogar() {
-    this._loading = true;
+    // this._loading = true;
+    setState(() {
+      _loading = true;
+    });
 
     var _arrayCaraOuCoroa = ["cara", "coroa"];
     var _numeroRandomico = Random().nextInt(_arrayCaraOuCoroa.length);
@@ -85,18 +86,25 @@ class _JogoState extends State<Jogo> with SingleTickerProviderStateMixin {
               SizedBox(height: 20),
               SizedBox(
                 width: _screenWidth / 2,
-                child: ElevatedButton(
-                  child: Text("Jogar"),
-                  onPressed: _functionJogar,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(),
+                      child: Text("Jogar"),
+                      onPressed: _loading ? null : _functionJogar,
+                    ),
+                    if (_loading)
+                      Positioned(
+                        child: Container(
+                          height: 48,
+                          width: 48,
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                  ],
                 ),
               ),
-
-              SizedBox(height: 20,),
-              if (_loading) CircularProgressIndicator(),
-              // ElevatedButton(
-              //   child: Text("Voltar"),
-              //   onPressed: _functionVoltar,
-              // ),
             ],
           ),
         ),

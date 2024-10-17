@@ -46,6 +46,7 @@ class _TelaprinciapalState extends State<Telaprinciapal> {
                 onPressed: _functionIrParaTelaJogar,
               ),
             ),
+            
             SizedBox(
               width: _screenWidth / 1.1,
               child: ElevatedButton(
